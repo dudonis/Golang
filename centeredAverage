@@ -1,0 +1,29 @@
+package main
+
+import "fmt"
+
+// Implement a centeredAverage function that computes the average of a list of
+// numbers, but removes the largest and smallest values.
+// centeredAverage([]float64{1, 2, 3, 4, 100}) → 3
+
+func main() {
+	average := centeredAverage([]float64{1, 2, 3, 4, 100})
+	fmt.Println(average)
+}
+
+//average = (total - min - max) / total values - 2
+func centeredAverage(xs []float64) float64 {
+	min := xs[0] // assume first value is the smallest
+	max := xs[0] // assume first value is the smallest
+	total := 0.0
+	for _, value := range xs {
+		if value < min {
+			min = value
+		} // found another smaller value, replace previous value in min
+		if value > max {
+			max = value
+		}
+		total += value
+	}
+	return (total - min - max) / float64(len(xs)-2)
+}
